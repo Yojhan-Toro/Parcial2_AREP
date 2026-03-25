@@ -2,8 +2,9 @@ package edu.co.eci.math;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @SpringBootApplication
 public class MathApplication {
@@ -19,8 +20,12 @@ public class MathApplication {
 		a.add(2);
 		a.add(3);
 
+		String b = "1,2,3,4,5";
+		String [] c = b.split(",");
 
-		System.out.print(math.linearSearch(a, 4));
+
+
+
 
 	}
 

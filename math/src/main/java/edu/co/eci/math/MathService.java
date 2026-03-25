@@ -2,21 +2,33 @@ package edu.co.eci.math;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import java.util.ArrayList;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
+@RestController
 public class MathService {
 
 
-    @RequestMapping("/linearSearch")
-    public String linearSearch(ArrayList<Integer> lista, int value){
+    @GetMapping("/linearsearch")
 
-        for(int i = 0; lista.size() > i ; i++){
-            if(lista.get(i) == value){
+    public String linearSearch(@RequestParam String list, @RequestParam String value){
+
+        List<String> valores = Arrays.stream(list.split(",")).toList();
+
+        for(int i = 0; valores.size() > i ; i++){
+            if(Objects.equals(valores.get(i), value)){
+
                 return "{\n" +
                         " \"operation\": \"linearSearch\",\n" +
-                        " \"inputlist\": \""+lista.toString()+"\",\n" +
+                        " \"inputlist\": \""+list+"\",\n" +
                         " \"value\": \""+ value +"\", \n" +
                         " \"output\":  \""+i+"\"\n" +
                         "}";
@@ -24,22 +36,44 @@ public class MathService {
         }
         return "{\n" +
                 " \"operation\": \"linearSearch\",\n" +
-                " \"inputlist\": \""+lista+"\",\n" +
+                " \"inputlist\": \""+list+"\",\n" +
                 " \"value\": \""+ value +"\", \n" +
                 " \"output\":  \""+ -1 +"\"\n" +
                 "}";
     }
 
 
-    @RequestMapping("/binarySearch")
-    public String binarySearch(ArrayList<Integer> lista, int value) {
+    @GetMapping("/binarySearch")
+    public String binarySearch(String list, String value) {
 
-        lista.stream().sorted();
+        int numero = Integer.parseInt(value);
+        List<String> valores = Arrays.stream(list.split(",")).toList();
+
+        for(int i = 0; valores.size() > i ; i++) {
 
 
+            if (Objects.equals(valores.get(i), numero)) {
 
 
-        return "-1";
+            }
+        }
     }
+
+
+
+    public int[] transformar(List<String> ingresa){
+
+
+        for(int i = 0; ingresa.size()>i; i++){
+
+        }
+
+        return null;
+
+    }
+
+
+
+
 
 }
