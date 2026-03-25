@@ -1,1 +1,3 @@
 # Parcial2_AREP
+
+Video: https://pruebacorreoescuelaingeduco-my.sharepoint.com/:v:/g/personal/yojhan_toro-r_mail_escuelaing_edu_co/IQCxXmmeZSZXQrswBRpstK4DAdtyyByt_u-lfORLsDqKjnQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=B1bKIw
