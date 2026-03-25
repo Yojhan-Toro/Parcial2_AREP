@@ -43,37 +43,48 @@ public class MathService {
     }
 
 
-    @GetMapping("/binarySearch")
-    public String binarySearch(String list, String value) {
+    @GetMapping("/binarysearch")
+    public String binarySearch(@RequestParam String list, @RequestParam String value) {
 
-        int numero = Integer.parseInt(value);
-        List<String> valores = Arrays.stream(list.split(",")).toList();
+        int target = Integer.parseInt(value);
 
-        for(int i = 0; valores.size() > i ; i++) {
+        List<Integer> original = Arrays.stream(list.split(","))
+                .map(Integer::parseInt)
+                .toList();
 
+        List<Integer> valores = original.stream()
+                .sorted()
+                .toList();
 
-            if (Objects.equals(valores.get(i), numero)) {
+        int low = 0;
+        int high = valores.size() - 1;
 
+        while (low <= high) {
+            int mid = (low + high) / 2;
 
+            if (valores.get(mid) == target) {
+                int indexOriginal = original.indexOf(target);
+
+                return "{\n" +
+                        " \"operation\": \"binarySearch\",\n" +
+                        " \"inputlist\": \"" + list + "\",\n" +
+                        " \"value\": \"" + value + "\",\n" +
+                        " \"output\": \"" + indexOriginal + "\"\n" +
+                        "}";
+            }
+
+            if (valores.get(mid) < target) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
             }
         }
+
+        return "{\n" +
+                " \"operation\": \"binarySearch\",\n" +
+                " \"inputlist\": \"" + list + "\",\n" +
+                " \"value\": \"" + value + "\",\n" +
+                " \"output\": \"-1\"\n" +
+                "}";
     }
-
-
-
-    public int[] transformar(List<String> ingresa){
-
-
-        for(int i = 0; ingresa.size()>i; i++){
-
-        }
-
-        return null;
-
-    }
-
-
-
-
-
 }

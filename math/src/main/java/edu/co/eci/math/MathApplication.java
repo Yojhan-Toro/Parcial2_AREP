@@ -11,22 +11,6 @@ public class MathApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MathApplication.class, args);
-
-
-		MathService math = new MathService();
-
-		ArrayList<Integer> a = new ArrayList<>();
-		a.add(1);
-		a.add(2);
-		a.add(3);
-
-		String b = "1,2,3,4,5";
-		String [] c = b.split(",");
-
-
-
-
-
 	}
 
 }
