@@ -7,16 +7,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ProxyController {
 
-    Enlace a = new Enlace();
+    private final Enlace enlace;
 
-    public ProxyController(Enlace a) {
-        this.a = a;
+    public ProxyController(Enlace enlace) {
+        this.enlace = enlace;
     }
 
-    @GetMapping("/linearSearch")
-    public String factorial(HttpServletRequest request) {
-        return a.delegate("/linearSearch", request.getQueryString());
+    @GetMapping("/linearsearch")
+    public String linearSearch(HttpServletRequest request) {
+        return enlace.delegate("/linearsearch", request.getQueryString());
     }
 
+    @GetMapping("/binarysearch")
+    public String binarysearch(HttpServletRequest request) {
+        return enlace.delegate("/binarysearch", request.getQueryString());
+    }
 
 }

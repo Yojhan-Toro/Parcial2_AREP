@@ -2,11 +2,6 @@ package edu.co.eci.proxy;
 
 import org.springframework.stereotype.Service;
 
-
-
-
-//package co.edu.eci.proxy.service;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,31 +13,34 @@ public class Enlace {
 
     private static final String USER_AGENT = "Mozilla/5.0";
 
-    private final String Url;
-
+    private final String[] urls;
 
     public Enlace() {
-
-
-        this.Url = "http://localhost:8080";
-
+        this.urls = new String[]{
+                "http://ec2-54-152-108-98.compute-1.amazonaws.com:8080",
+                "http://ec2-44-203-198-211.compute-1.amazonaws.com:8080"
+        };
     }
 
     public String delegate(String path, String queryString) {
         String query = (queryString != null && !queryString.isBlank()) ? "?" + queryString : "";
 
-        try {
-            return callService(Url + path + query);
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+        for (String url : urls) {
+            try {
+                System.out.println("Intentando con: " + url);
+                return callService(url + path + query);
+            } catch (IOException e) {
+                System.out.println("Fallo en: " + url + " -> " + e.getMessage());
+            }
         }
 
-        return "error api";
+        return "Todas las instancias fallaron";
     }
 
     private String callService(String targetUrl) throws IOException {
         URL obj = new URL(targetUrl);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
         con.setRequestMethod("GET");
         con.setRequestProperty("User-Agent", USER_AGENT);
         con.setConnectTimeout(3000);
@@ -52,21 +50,26 @@ public class Enlace {
         System.out.println("GET Response Code :: " + responseCode);
 
         if (responseCode == HttpURLConnection.HTTP_OK) {
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream())
+            );
+
             String inputLine;
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
+
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
+
             in.close();
-            System.out.println(response.toString());
-            System.out.println("GET DONE");
             return response.toString();
+
         } else {
             throw new IOException("HTTP error code: " + responseCode);
         }
     }
 
-    public String getUrl()  { return Url; }
-
+    public String[] getUrls() {
+        return urls;
+    }
 }
